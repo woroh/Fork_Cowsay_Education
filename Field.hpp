@@ -10,12 +10,13 @@ class Parser;
 
 class Field {
 
-    string message;
     Cow cow;
     Cloud cloud;
+    char sun;
+    char fill; 
+    string message;
     string tongue;
-    char fill;
-    char sun; 
+
 
 public:
 
