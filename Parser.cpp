@@ -118,7 +118,7 @@ char Parser::getFill()
         return '*';
     
     else if (flags.rain)
-        return '.';
+        return 'p';
 
     else if (flags.background)
         return '&';
