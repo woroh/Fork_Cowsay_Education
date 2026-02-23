@@ -1,0 +1,11 @@
+##
+## Kitty cat for cowsay
+##
+
+$the_cow = <<"EOC";
+    ╱|、
+   (˚ˎ 。7
+    |、˜〵
+    じしˍ,)ノ
+    Meow!
+EOC
