@@ -6,30 +6,27 @@ using std::string;
 
 class Parser {
 
-    string cowsource, cloudsource, message, tongue;
+private:
+    string cowsource, cloudsource, tongue, sunsource, message, background;
     struct Flags {
-        bool cowsource = false;
-        bool cloudsource = false;
-        bool eyes = false;
-        bool tongue = false;
-        bool snow = false;
-        bool rain = false;
+        bool cow = false;
+        bool cloud = false;
         bool background = false;
-        bool ks = false;
-        bool money = false;
+        bool tongue = false;
+        bool sun = false;
+        bool eyes = false;
     } flags;
 
 public:
-
     Parser(int argc, char *argv[]);
     ~Parser();
 
     string getCow();
     string getCloud();
-    char   getFill();
-    char   getSun();
-    string getMessage();
     string getTongue();
+    char   getFill();
+    string getSun();
+    string getMessage();
 };
 
 #endif

@@ -4,11 +4,11 @@
 using std::cout;
 using std::endl;
 
-Cow::Cow(string tongue, string fname) : ASCIIPicture("./cows/" + fname + ".cow"), tongue(tongue)
-{
-}
+Cow::Cow(string tongue, string fname) : ASCIIPicture("cows/" + fname + ".cow"), tongue(tongue)
+{ }
 
-Cow::~Cow() {}
+Cow::~Cow()
+{ }
 
 void Cow::print(unsigned int left, char fill, unsigned int width)
 {
