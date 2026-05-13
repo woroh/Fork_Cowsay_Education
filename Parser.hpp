@@ -7,6 +7,8 @@ using std::string;
 class Parser {
 
     string cowsource, cloudsource, message, tongue;
+    string color_;
+
     struct Flags {
         bool cowsource = false;
         bool cloudsource = false;
@@ -17,6 +19,7 @@ class Parser {
         bool background = false;
         bool ks = false;
         bool money = false;
+        bool color = false;
     } flags;
 
 public:
@@ -30,6 +33,7 @@ public:
     char   getSun();
     string getMessage();
     string getTongue();
+    string getColor();
 };
 
 #endif
