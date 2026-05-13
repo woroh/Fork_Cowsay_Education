@@ -21,9 +21,10 @@ Parser::Parser(int argc, char *argv[])
             cout << "-T [1 or 2 chars] to set a tongue" << endl;
             cout << "-s to change weather to snow" << endl;
             cout << "-r to change weather to rain" << endl;
-	          cout << "-ks to see cringe sun" << endl;
+            cout << "-ks to see cringe sun" << endl;
             cout << "-m to change weather to money" << endl;
             cout << "-l to see list of all cows and clouds" << endl;
+            cout << "--color [red/green/yellow/blue/magenta/cyan/white] to set output color" << endl;
             exit(0);
         }
         if (tmp == "-f")
@@ -46,20 +47,25 @@ Parser::Parser(int argc, char *argv[])
         }
         else if (tmp == "-s")
             flags.snow = true;
-	else if (tmp == "-ks")
-	{
+        else if (tmp == "-ks")
+        {
             flags.ks = true;
-	}
+        }
         else if (tmp == "-r")
             flags.rain = true;
-            
         else if (tmp == "-b")
             flags.background = true;
-
         else if (tmp == "-m")
             flags.money = true;
-
-        else if (tmp == "-l"){
+        else if (tmp == "--color")
+        {
+            arg++;
+            color_ = argv[arg];
+            for (char &c : color_) c = tolower(c);
+            flags.color = true;
+        }
+        else if (tmp == "-l")
+        {
             std::cout << "cows:" << std::endl;
             std::string path = "cows";
             for (const auto & entry : fs::directory_iterator(path))
@@ -116,16 +122,12 @@ char Parser::getFill()
 {
     if (flags.snow)
         return '*';
-    
     else if (flags.rain)
         return '.';
-
     else if (flags.background)
         return '&';
-        
     else if (flags.money)
         return '$';
-    
     else
         return ' ';
 }
@@ -133,14 +135,20 @@ char Parser::getFill()
 char Parser::getSun()
 {
     if (flags.ks)
-    {
-	return ')';
-    }
-    else 
-	return ' ';
+        return ')';
+    else
+        return ' ';
 }
 
 string Parser::getMessage()
 {
     return message;
+}
+
+string Parser::getColor()
+{
+    if (flags.color)
+        return color_;
+    else
+        return "";
 }
