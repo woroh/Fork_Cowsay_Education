@@ -2,3 +2,4 @@ Cowsay
 *.o
 *.so
 *.a
+Makefile
