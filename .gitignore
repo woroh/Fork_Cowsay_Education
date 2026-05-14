@@ -1,0 +1,4 @@
+Cowsay
+*.o
+*.so
+*.a
