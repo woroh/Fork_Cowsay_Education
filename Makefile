@@ -1,20 +1,26 @@
 CC=g++
-CFLAGS=-std=c++17 -O2 -lstdc++fs
+CFLAGS=-std=c++17 -O2 -fPIC
 .PHONY: all clean install uninstall
 
-all: cowsay
+all: cowsay_my
+
+libcowsay.so: Cow.o Cloud.o ASCIIPicture.o
+	$(CC) -shared -o libcowsay.so Cow.o Cloud.o ASCIIPicture.o
 
 clean:
-	rm *.o cowsay
+	rm *.o libcowsay.so cowsay_my
 install:
-	install ./cowsay /usr/local/bin
-	mkdir -p /usr/share/cowsay
-	cp -r cows /usr/share/cowsay/
-	cp -r clouds /usr/share/cowsay/
+	install ./cowsay_my /usr/local/bin
+	mkdir -p /usr/local/lib/cowsay_my
+	install ./libcowsay.so /usr/local/lib/cowsay
+	mkdir -p /usr/share/cowsay_my
+	cp -r cows /usr/share/cowsay_my/
+	cp -r clouds /usr/share/cowsay_my/
 uninstall:
-	rm /usr/local/bin/cowsay
-	rm -r /usr/share/cowsay/cows
-	rm -r /usr/share/cowsay/clouds
+	rm /usr/local/bin/cowsay_my
+	rm /usr/local/lib/cowsay/libcowsay.so
+	rm -r /usr/share/cowsay_my/cows
+	rm -r /usr/share/cowsay_my/clouds
 main.o: main.cpp Parser.hpp Field.hpp Cow.hpp Cloud.hpp ASCIIPicture.hpp
 	$(CC) $(CFLAGS) -c main.cpp -o main.o
 
@@ -33,5 +39,5 @@ Cloud.o: Cloud.cpp Cloud.hpp ASCIIPicture.hpp
 ASCIIPicture.o: ASCIIPicture.cpp ASCIIPicture.hpp
 	$(CC) $(CFLAGS) -c ASCIIPicture.cpp -o ASCIIPicture.o
 
-cowsay: main.o Parser.o Field.o Cow.o Cloud.o ASCIIPicture.o
-	$(CC) $(CFLAGS) main.o Parser.o Field.o Cow.o Cloud.o ASCIIPicture.o -o cowsay
+cowsay_my: main.o Parser.o Field.o libcowsay.so
+	$(CC) $(CFLAGS) -o cowsay_my main.o Parser.o Field.o -L. -lcowsay -Wl,-rpath,/usr/local/lib/cowsay_my
