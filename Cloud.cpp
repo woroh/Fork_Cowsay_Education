@@ -1,10 +1,17 @@
 #include "Cloud.hpp"
-
+#include <filesystem>
+#include <string>
 #include <iostream>
 using std::cout;
 using std::endl;
-
-Cloud::Cloud(string message, string fname) : ASCIIPicture("./clouds/" + fname + ".cloud"), message(message)
+static std::string findpath(const std::string& subdir, const std::string& filename){
+	std::string syspath="/usr/share/cowsay/"+subdir+"/"+filename;
+	if (std::filesystem::exists(syspath))
+		return syspath;
+	std::string localpath="./"+subdir+"/"+filename;
+	return localpath;
+}
+Cloud::Cloud(string message, string fname) : ASCIIPicture(findpath("clouds", fname+".cloud")), message(message)
 {
 }
 
