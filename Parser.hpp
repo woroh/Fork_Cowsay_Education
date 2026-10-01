@@ -17,6 +17,7 @@ class Parser {
         bool background = false;
         bool ks = false;
         bool money = false;
+	bool waves = false;
     } flags;
 
 public:

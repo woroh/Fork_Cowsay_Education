@@ -24,6 +24,7 @@ Parser::Parser(int argc, char *argv[])
 	          cout << "-ks to see cringe sun" << endl;
             cout << "-m to change weather to money" << endl;
             cout << "-l to see list of all cows and clouds" << endl;
+            cout << "-w to change weather to waves" << endl;
             exit(0);
         }
         if (tmp == "-f")
@@ -58,6 +59,9 @@ Parser::Parser(int argc, char *argv[])
 
         else if (tmp == "-m")
             flags.money = true;
+
+        else if (tmp == "-w")
+            flags.waves = true;
 
         else if (tmp == "-l"){
             std::cout << "cows:" << std::endl;
@@ -125,6 +129,9 @@ char Parser::getFill()
         
     else if (flags.money)
         return '$';
+    
+    else if (flags.waves)
+        return '~';
     
     else
         return ' ';
